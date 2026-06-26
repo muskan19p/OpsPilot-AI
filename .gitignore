@@ -1,0 +1,178 @@
+# ======================================================
+# OpsPilot AI - Enterprise AI SaaS
+# FastAPI + Streamlit + PostgreSQL + Docker
+# ======================================================
+
+# -----------------------------
+# Python
+# -----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# -----------------------------
+# Virtual Environments
+# -----------------------------
+venv/
+.venv/
+env/
+ENV/
+
+# -----------------------------
+# Environment Variables
+# -----------------------------
+.env
+.env.local
+.env.production
+.env.development
+
+# -----------------------------
+# IDE
+# -----------------------------
+.vscode/
+.idea/
+*.code-workspace
+
+# -----------------------------
+# OS Files
+# -----------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -----------------------------
+# Build
+# -----------------------------
+build/
+dist/
+*.egg-info/
+
+# -----------------------------
+# Logs
+# -----------------------------
+logs/
+*.log
+
+# -----------------------------
+# Cache
+# -----------------------------
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+
+# -----------------------------
+# Coverage
+# -----------------------------
+.coverage
+coverage.xml
+htmlcov/
+
+# -----------------------------
+# Jupyter
+# -----------------------------
+.ipynb_checkpoints/
+
+# -----------------------------
+# SQLite
+# -----------------------------
+*.db
+*.sqlite3
+
+# -----------------------------
+# PostgreSQL Dumps
+# -----------------------------
+*.sql
+
+# -----------------------------
+# Alembic
+# -----------------------------
+alembic/versions/*.pyc
+
+# -----------------------------
+# Streamlit
+# -----------------------------
+.streamlit/secrets.toml
+
+# -----------------------------
+# Uploaded Files
+# -----------------------------
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# -----------------------------
+# Static Generated Files
+# -----------------------------
+backend/static/generated/*
+!backend/static/generated/.gitkeep
+
+# -----------------------------
+# AI Cache
+# -----------------------------
+ai_models/cache/*
+!ai_models/cache/.gitkeep
+
+# -----------------------------
+# Local AI Models
+# -----------------------------
+ai_models/local_models/*
+!ai_models/local_models/.gitkeep
+
+# -----------------------------
+# Generated Reports
+# -----------------------------
+generated_reports/*
+!generated_reports/.gitkeep
+
+# -----------------------------
+# Temporary Files
+# -----------------------------
+*.tmp
+*.bak
+*.swp
+
+# -----------------------------
+# Docker
+# -----------------------------
+*.pid
+
+# -----------------------------
+# Node.js (Future React)
+# -----------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# -----------------------------
+# Flutter (Future Mobile)
+# -----------------------------
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+
+# -----------------------------
+# Secrets & Certificates
+# -----------------------------
+*.pem
+*.key
+*.crt
+*.pfx
+
+# -----------------------------
+# VS Code Testing
+# -----------------------------
+.history/
+
+# -----------------------------
+# Misc
+# -----------------------------
+*.zip
+*.rar
+*.7z
+*.tar.gz
