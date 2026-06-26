@@ -200,7 +200,7 @@ OpsPilot-AI/
 ## Clone Repository
 
 ```bash
-git clone https://github.com/<your-username>/OpsPilot-AI.git
+git clone https://github.com/muskan19p/OpsPilot-AI.git
 cd OpsPilot-AI
 ```
 
