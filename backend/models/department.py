@@ -5,24 +5,32 @@ Department Model
 Stores organization departments.
 """
 
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from sqlalchemy import Boolean
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
-from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from backend.models.base import BaseModel
 
 if TYPE_CHECKING:
     from backend.models.user import User
-    
-from backend.models.base import BaseModel
 
 
 class Department(BaseModel):
     """
-    Department Model.
+    Department model.
+
+    Examples:
+        - Engineering
+        - Human Resources
+        - Finance
+        - Marketing
+        - Sales
     """
 
     __tablename__ = "departments"
@@ -42,6 +50,7 @@ class Department(BaseModel):
         String(20),
         unique=True,
         nullable=False,
+        index=True,
     )
 
     description: Mapped[str | None] = mapped_column(
@@ -60,9 +69,8 @@ class Department(BaseModel):
     # ==========================================================
 
     users: Mapped[list["User"]] = relationship(
-    "User",
-    back_populates="department",
-    lazy="selectin",
+        back_populates="department",
+        lazy="selectin",
     )
 
     # ==========================================================

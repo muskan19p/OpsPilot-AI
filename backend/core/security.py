@@ -2,104 +2,80 @@
 OpsPilot AI
 Security Utilities
 
-Handles:
-- Password Hashing
-- Password Verification
-- JWT Token Creation
-- JWT Token Validation
+Provides password hashing, password verification,
+JWT token creation, and token decoding utilities.
 """
 
-from datetime import datetime, timedelta, timezone
-from typing import Any, Optional
+from __future__ import annotations
 
-from jose import JWTError, jwt
-from passlib.context import CryptContext
+from datetime import datetime, timedelta, timezone
+from typing import Any
+
+import jwt
+from pwdlib import PasswordHash
 
 from backend.core.config import settings
 
 # ==========================================================
-# Password Hashing
+# Password Hasher
 # ==========================================================
 
-pwd_context = CryptContext(
-    schemes=["bcrypt"],
-    deprecated="auto",
-)
+password_hash = PasswordHash.recommended()
+
 
 # ==========================================================
-# Password Functions
+# Password Utilities
 # ==========================================================
-
 
 def hash_password(password: str) -> str:
     """
-    Hash a plain password.
+    Hash a plain text password.
     """
-    return pwd_context.hash(password)
+    return password_hash.hash(password)
 
 
-def verify_password(
-    plain_password: str,
-    hashed_password: str,
-) -> bool:
+def verify_password(password: str, hashed_password: str) -> bool:
     """
-    Verify password against its hash.
+    Verify a password against its hash.
     """
-    return pwd_context.verify(
-        plain_password,
-        hashed_password,
-    )
+    return password_hash.verify(password, hashed_password)
 
 
 # ==========================================================
-# JWT Token
+# JWT Utilities
 # ==========================================================
-
 
 def create_access_token(
     subject: str,
-    expires_delta: Optional[timedelta] = None,
-    extra_data: Optional[dict[str, Any]] = None,
+    expires_delta: timedelta | None = None,
 ) -> str:
     """
-    Create JWT access token.
+    Create a JWT access token.
     """
 
-    if expires_delta:
-        expire = datetime.now(timezone.utc) + expires_delta
-    else:
-        expire = datetime.now(timezone.utc) + timedelta(
+    if expires_delta is None:
+        expires_delta = timedelta(
             minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES
         )
 
-    payload = {
+    expire = datetime.now(timezone.utc) + expires_delta
+
+    payload: dict[str, Any] = {
         "sub": subject,
         "exp": expire,
+        "type": "access",
     }
 
-    if extra_data:
-        payload.update(extra_data)
-
-    encoded_jwt = jwt.encode(
+    return jwt.encode(
         payload,
         settings.SECRET_KEY,
         algorithm=settings.ALGORITHM,
     )
 
-    return encoded_jwt
 
-
-# ==========================================================
-# Decode JWT
-# ==========================================================
-
-
-def decode_access_token(token: str) -> dict:
+def decode_access_token(token: str) -> dict[str, Any]:
     """
-    Decode JWT token.
-
-    Raises:
-        JWTError
+    Decode a JWT access token.
     """
 
     return jwt.decode(
@@ -107,24 +83,3 @@ def decode_access_token(token: str) -> dict:
         settings.SECRET_KEY,
         algorithms=[settings.ALGORITHM],
     )
-
-
-# ==========================================================
-# Validate JWT
-# ==========================================================
-
-
-def verify_token(token: str) -> Optional[dict]:
-    """
-    Verify JWT token.
-
-    Returns payload if valid.
-    Returns None if invalid.
-    """
-
-    try:
-        payload = decode_access_token(token)
-        return payload
-
-    except JWTError:
-        return None

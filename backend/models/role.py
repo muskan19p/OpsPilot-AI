@@ -2,27 +2,33 @@
 OpsPilot AI
 Role Model
 
-Defines user roles for Role-Based Access Control (RBAC).
+Defines user roles used for Role-Based Access Control (RBAC).
 """
+
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
 
 from sqlalchemy import Boolean
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
-from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from backend.models.base import BaseModel
 
 if TYPE_CHECKING:
     from backend.models.user import User
-    
-from backend.models.base import BaseModel
 
 
 class Role(BaseModel):
     """
-    User Role Model.
+    Role model.
+
+    Examples:
+        - Admin
+        - Manager
+        - Employee
     """
 
     __tablename__ = "roles"
@@ -59,12 +65,12 @@ class Role(BaseModel):
     # ==========================================================
 
     users: Mapped[list["User"]] = relationship(
-    back_populates="role",
-    lazy="selectin",
-)
+        back_populates="role",
+        lazy="selectin",
+    )
 
     # ==========================================================
-    # String Representation
+    # Representation
     # ==========================================================
 
     def __repr__(self) -> str:

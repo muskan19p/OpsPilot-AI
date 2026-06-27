@@ -106,3 +106,27 @@ ruff==0.12.11
 # Deployment
 # -----------------------------
 gunicorn==23.0.0
+
+
+fastapi
+uvicorn
+
+sqlalchemy
+alembic
+psycopg[binary]
+
+pydantic
+pydantic-settings
+
+pwdlib
+PyJWT
+
+python-multipart
+
+python-dotenv
+
+plotly
+groq
+sentence-transformers
+
+pytest
